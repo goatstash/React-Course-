@@ -1,15 +1,19 @@
-import { useReducer } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
-function App() {
-  const [checked, toggle] = useReducer((checked) => !checked, false);
+function App({ login }) {
+  const [data, updateData] = useState(null);
 
-  return (
-    <>
-      <input type="checkbox" value={checked} onChange={toggle} />
-      <p>{checked ? "Checked" : "Not Checked"}</p>
-    </>
-  );
+  useEffect(() => {
+    fetch(`https://api.github.com/users/${login}`).then((response) =>
+      response.json().then(updateData)
+    );
+  });
+
+  if (data) {
+    return <div>{JSON.stringify(data)}</div>;
+  }
+  return <div>No user available</div>;
 }
 
 export default App;
