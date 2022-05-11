@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { Home, About, Products, Contact, Error404 } from "./Pages";
 
 function App() {
   // const [data, updateData] = useState(null);
@@ -21,7 +23,17 @@ function App() {
   // if (error) return <pre>{JSON.stringify(error, null, 2)}</pre>;
   // if (!data) return null;
 
-  return <h1>Welcome to react testing library</h1>;
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Error404 />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
